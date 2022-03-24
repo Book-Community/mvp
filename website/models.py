@@ -3,9 +3,17 @@ from django.db import models
 
 # Create your models here.
 
+class Country(models.Model):
+	id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+	name_el = models.CharField(max_length=100)
+	name_en = models.CharField(max_length=100)
+
 class Author(models.Model):
 	first_name = models.CharField(max_length=30)
 	last_name = models.CharField(max_length=30)
+	first_name_el = models.CharField(max_length=30, blank=True)
+	last_name_el = models.CharField(max_length=30, blank=True)
+	country = models.ForeignKey(Country, null = True, on_delete=models.SET_NULL)
 	born = models.DateField()
 	dead = models.DateField()
 	bio = models.TextField(max_length=3000)
@@ -18,6 +26,7 @@ class Genres(models.Model):
 class Book(models.Model):
 	title = models.CharField(max_length=300)
 	original_title = models.CharField(max_length=300, blank=True)
+	original_isbn13 = models.BigIntegerField(blank=True)
 	authors = models.ManyToManyField(Author)
 	publisher = models.ForeignKey(Publisher, on_delete=models.SET_NULL, null=True)
 	language = models.CharField(max_length=100)
@@ -39,11 +48,23 @@ class List(models.Model):
 	date_last_update = models.DateTimeField()
 	id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 	books = models.ManyToManyField(Book)
-class userList(models.Model):
-	user = models.OneToOneField(User, on_delete=models.CASCADE)
-	to_read = models.OneToOneField(List, on_delete=models.PROTECT, related_name='to_read')
-	currently_reading = models.OneToOneField(List, on_delete=models.PROTECT, related_name='currently_reading')
-	read = models.OneToOneField(List, on_delete=models.PROTECT, related_name='read')
+class ReadList(models.Model):
+	user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+	date_created = models.DateTimeField()
+	date_last_update = models.DateTimeField()
+	books = models.ManyToManyField(Book)
+
+class ToReadList(models.Model):
+	user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+	date_created = models.DateTimeField()
+	date_last_update = models.DateTimeField()
+	books = models.ManyToManyField(Book)
+
+class CurrentlyReadingList(models.Model):
+	user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+	date_created = models.DateTimeField()
+	date_last_update = models.DateTimeField()
+	books = models.ManyToManyField(Book)	
 class Review(models.Model):
 	id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 	user = models.OneToOneField(User, on_delete=models.CASCADE)

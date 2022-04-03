@@ -41,14 +41,14 @@ class User(models.Model):
 	last_name = models.CharField(max_length=30)
 	email = models.EmailField(max_length=254, unique=True, primary_key=True)
 
-class Friends(models.model):
+class Friends(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key= True)
-	friends = models.ManyToManyField(User, blank=True)
+	friends = models.ManyToManyField(User, blank=True, related_name="friends_of_user")
 
 class FriendRequest(models.Model):
 	id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-	from_user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
-	to_user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, db_index= True)
+	from_user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, related_name="from_user_request")
+	to_user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, db_index= True, related_name="to_user_request")
 
 class List(models.Model):
 	name = models.CharField(max_length=300)

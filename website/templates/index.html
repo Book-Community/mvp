@@ -1,131 +1,145 @@
 <html>
-	<head>
-		{% load static %}
-		<link rel="stylesheet" href="{% static 'theme.css' %}" />
-		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-		<script src="{% static 'bundle.js' %}" async></script>
-	</head>
-	<body>
-		<header class="mdc-top-app-bar mdc-top-app-bar--short">
-			<div class="mdc-top-app-bar__row">
-			  <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+
+<head>
+	{% load static %}
+	<link rel="stylesheet" href="{% static 'theme.css' %}" />
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<script src="{% static 'bundle.js' %}" async></script>
+</head>
+
+<body>
+	<header class="mdc-top-app-bar mdc-top-app-bar--short">
+		<div class="mdc-top-app-bar__row">
+			<section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
 				<button class="mdc-button material-icons mdc-top-app-bar__navigation-icon mdc-icon-button">menu</button>
 				<span class="mdc-top-app-bar__title">Title</span>
-			  </section>
-			  <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
-				<button class="mdc-button material-icons mdc-top-app-bar__action-item mdc-icon-button" aria-label="Bookmark this page">bookmark</button>
-			  </section>
-			</div>
-		  </header>
-		  <main class="mdc-top-app-bar--short-fixed-adjust">
-			<div class="mdc-card">
-				<div class="mdc-card__primary-action">
-				  <div class="mdc-card__media">
+			</section>
+			<section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
+				<button class="mdc-button material-icons mdc-top-app-bar__action-item mdc-icon-button"
+					aria-label="Bookmark this page">bookmark</button>
+			</section>
+		</div>
+	</header>
+	<main class="mdc-top-app-bar--short-fixed-adjust">
+		{% if user.is_authenticated %}
+		Hi {{ user.username }}!
+		<p><a href="{% url 'logout' %}">Log Out</a></p>
+		{% else %}
+		<p>You are not logged in</p>
+		<a href="{% url 'login' %}">Log In</a>
+		{% endif %}
+		<div class="mdc-card">
+			<div class="mdc-card__primary-action">
+				<div class="mdc-card__media">
 					<div class="mdc-card__media-content">Title</div>
-				  </div>
-				  <div class="mdc-card__ripple"></div>
 				</div>
-				<div class="mdc-card__actions">
-				  <div class="mdc-card__action-buttons">
+				<div class="mdc-card__ripple"></div>
+			</div>
+			<div class="mdc-card__actions">
+				<div class="mdc-card__action-buttons">
 					<button class="mdc-button mdc-card__action mdc-card__action--button">
-					  <div class="mdc-button__ripple"></div>
-					  <span class="mdc-button__label">Action 1</span>
+						<div class="mdc-button__ripple"></div>
+						<span class="mdc-button__label">Action 1</span>
 					</button>
 					<button class="mdc-button mdc-card__action mdc-card__action--button">
-					  <div class="mdc-button__ripple"></div>
-					  <span class="mdc-button__label">Action 2</span>
+						<div class="mdc-button__ripple"></div>
+						<span class="mdc-button__label">Action 2</span>
 					</button>
-				  </div>
-				  <div class="mdc-card__action-icons">
-					<button class="mdc-button material-icons mdc-icon-button mdc-card__action mdc-card__action--icon" title="Share">share</button>
-					<button class="mdc-button material-icons mdc-icon-button mdc-card__action mdc-card__action--icon" title="More options">more_vert</button>
-				  </div>
 				</div>
-			  </div>
-			  <button class="mdc-button mdc-button--outlined mdc-button--icon-leading">
-				<span class="mdc-button__ripple"></span>
-				<i class="material-icons mdc-button__icon" aria-hidden="true">bookmark</i>
-				<span class="mdc-button__label">Outlined Button plus Icon</span>
-			  </button>
-			  <button class="mdc-button mdc-button--raised mdc-button--leading">
-				<span class="mdc-button__ripple"></span>
-				<i class="material-icons mdc-button__icon" aria-hidden="true"
-				  >bookmark</i
-				>
-				<span class="mdc-button__label">Contained Button plus Icon</span>
-			  </button>
-			  <button class="mdc-button mdc-button--outlined">
-				<span class="mdc-button__ripple"></span>
-				<span class="mdc-button__label">Outlined Button</span>
-			  </button>
+				<div class="mdc-card__action-icons">
+					<button class="mdc-button material-icons mdc-icon-button mdc-card__action mdc-card__action--icon"
+						title="Share">share</button>
+					<button class="mdc-button material-icons mdc-icon-button mdc-card__action mdc-card__action--icon"
+						title="More options">more_vert</button>
+				</div>
+			</div>
+		</div>
+		<button class="mdc-button mdc-button--outlined mdc-button--icon-leading">
+			<span class="mdc-button__ripple"></span>
+			<i class="material-icons mdc-button__icon" aria-hidden="true">bookmark</i>
+			<span class="mdc-button__label">Outlined Button plus Icon</span>
+		</button>
+		<button class="mdc-button mdc-button--raised mdc-button--leading">
+			<span class="mdc-button__ripple"></span>
+			<i class="material-icons mdc-button__icon" aria-hidden="true">bookmark</i>
+			<span class="mdc-button__label">Contained Button plus Icon</span>
+		</button>
+		<button class="mdc-button mdc-button--outlined">
+			<span class="mdc-button__ripple"></span>
+			<span class="mdc-button__label">Outlined Button</span>
+		</button>
 
-			  <div class="mdc-data-table">
-				<div class="mdc-data-table__table-container">
-				  <table class="mdc-data-table__table" aria-label="Dessert calories">
+		<div class="mdc-data-table">
+			<div class="mdc-data-table__table-container">
+				<table class="mdc-data-table__table" aria-label="Dessert calories">
 					<thead>
-					  <tr class="mdc-data-table__header-row">
-						<th class="mdc-data-table__header-cell" role="columnheader" scope="col">Dessert</th>
-						<th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric" role="columnheader" scope="col">Carbs (g)</th>
-						<th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric" role="columnheader" scope="col">Protein (g)</th>
-						<th class="mdc-data-table__header-cell" role="columnheader" scope="col">Comments</th>
-					  </tr>
+						<tr class="mdc-data-table__header-row">
+							<th class="mdc-data-table__header-cell" role="columnheader" scope="col">Dessert</th>
+							<th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric"
+								role="columnheader" scope="col">Carbs (g)</th>
+							<th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric"
+								role="columnheader" scope="col">Protein (g)</th>
+							<th class="mdc-data-table__header-cell" role="columnheader" scope="col">Comments</th>
+						</tr>
 					</thead>
 					<tbody class="mdc-data-table__content">
-					  <tr class="mdc-data-table__row">
-						<th class="mdc-data-table__cell" scope="row">Frozen yogurt</th>
-						<td class="mdc-data-table__cell mdc-data-table__cell--numeric">24</td>
-						<td class="mdc-data-table__cell mdc-data-table__cell--numeric">4.0</td>
-						<td class="mdc-data-table__cell">Super tasty</td>
-					  </tr>
-					  <tr class="mdc-data-table__row">
-						<th class="mdc-data-table__cell" scope="row">Ice cream sandwich</th>
-						<td class="mdc-data-table__cell mdc-data-table__cell--numeric">37</td>
-						<td class="mdc-data-table__cell mdc-data-table__cell--numeric">4.33333333333</td>
-						<td class="mdc-data-table__cell">I like ice cream more</td>
-					  </tr>
-					  <tr class="mdc-data-table__row">
-						<th class="mdc-data-table__cell" scope="row">Eclair</th>
-						<td class="mdc-data-table__cell mdc-data-table__cell--numeric">24</td>
-						<td class="mdc-data-table__cell mdc-data-table__cell--numeric">6.0</td>
-						<td class="mdc-data-table__cell">New filing flavor</td>
-					  </tr>
+						<tr class="mdc-data-table__row">
+							<th class="mdc-data-table__cell" scope="row">Frozen yogurt</th>
+							<td class="mdc-data-table__cell mdc-data-table__cell--numeric">24</td>
+							<td class="mdc-data-table__cell mdc-data-table__cell--numeric">4.0</td>
+							<td class="mdc-data-table__cell">Super tasty</td>
+						</tr>
+						<tr class="mdc-data-table__row">
+							<th class="mdc-data-table__cell" scope="row">Ice cream sandwich</th>
+							<td class="mdc-data-table__cell mdc-data-table__cell--numeric">37</td>
+							<td class="mdc-data-table__cell mdc-data-table__cell--numeric">4.33333333333</td>
+							<td class="mdc-data-table__cell">I like ice cream more</td>
+						</tr>
+						<tr class="mdc-data-table__row">
+							<th class="mdc-data-table__cell" scope="row">Eclair</th>
+							<td class="mdc-data-table__cell mdc-data-table__cell--numeric">24</td>
+							<td class="mdc-data-table__cell mdc-data-table__cell--numeric">6.0</td>
+							<td class="mdc-data-table__cell">New filing flavor</td>
+						</tr>
 					</tbody>
-				  </table>
-				</div>
-			  
-				<div class="mdc-data-table__progress-indicator">
-				  <div class="mdc-data-table__scrim"></div>
-				  <div class="mdc-linear-progress mdc-linear-progress--indeterminate mdc-data-table__linear-progress" role="progressbar" aria-label="Data is being loaded...">
+				</table>
+			</div>
+
+			<div class="mdc-data-table__progress-indicator">
+				<div class="mdc-data-table__scrim"></div>
+				<div class="mdc-linear-progress mdc-linear-progress--indeterminate mdc-data-table__linear-progress"
+					role="progressbar" aria-label="Data is being loaded...">
 					<div class="mdc-linear-progress__buffer">
-					  <div class="mdc-linear-progress__buffer-bar"></div>
-					  <div class="mdc-linear-progress__buffer-dots"></div>
+						<div class="mdc-linear-progress__buffer-bar"></div>
+						<div class="mdc-linear-progress__buffer-dots"></div>
 					</div>
 					<div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar">
-					  <span class="mdc-linear-progress__bar-inner"></span>
+						<span class="mdc-linear-progress__bar-inner"></span>
 					</div>
 					<div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar">
-					  <span class="mdc-linear-progress__bar-inner"></span>
+						<span class="mdc-linear-progress__bar-inner"></span>
 					</div>
-				  </div>
 				</div>
-				
-				
-				  <aside class="mdc-snackbar">
-					<div class="mdc-snackbar__surface" role="status" aria-relevant="additions">
-					  <div class="mdc-snackbar__label" aria-atomic="false">
+			</div>
+
+
+			<aside class="mdc-snackbar">
+				<div class="mdc-snackbar__surface" role="status" aria-relevant="additions">
+					<div class="mdc-snackbar__label" aria-atomic="false">
 						Can't send photo. Retry in 5 seconds.
-					  </div>
-					  <div class="mdc-snackbar__actions" aria-atomic="true">
-						<button type="button" class="mdc-button mdc-snackbar__action">
-						  <div class="mdc-button__ripple"></div>
-						  <span class="mdc-button__label">Retry</span>
-						</button>
-					  </div>
 					</div>
-				  </aside>
+					<div class="mdc-snackbar__actions" aria-atomic="true">
+						<button type="button" class="mdc-button mdc-snackbar__action">
+							<div class="mdc-button__ripple"></div>
+							<span class="mdc-button__label">Retry</span>
+						</button>
+					</div>
+				</div>
+			</aside>
 
-			  </div>
+		</div>
 
-			</main>
-	</body>
+	</main>
+</body>
+
 </html>

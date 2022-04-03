@@ -1,5 +1,5 @@
 @use "@material/theme" with (
-  $primary: #2f2e41,
+  $primary: #03989e,
   $secondary: #e3e1de,
   $on-primary: #e3e1de,
   $on-secondary: #2f2e41,
@@ -25,3 +25,7 @@
 @include card.core-styles;
 @include data-table.core-styles;
 @include data-table.theme-baseline;
+
+
+.auth{
+}

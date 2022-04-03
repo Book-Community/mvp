@@ -4,7 +4,7 @@
   $on-primary: #e3e1de,
   $on-secondary: #2f2e41,
 );
-
+@use "node_modules/bootstrap/scss/bootstrap-grid.scss";
 @use "@material/card";
 @use "@material/button/styles";
 @use "@material/icon-button";
@@ -20,7 +20,6 @@
 @use "@material/list";
 @import "@material/chips/styles";
 @import "@material/checkbox"; // Required only for data table with row selection.
-
 @include textfield.core-styles;
 @include card.core-styles;
 @include data-table.core-styles;
@@ -28,4 +27,5 @@
 
 
 .auth{
+
 }
